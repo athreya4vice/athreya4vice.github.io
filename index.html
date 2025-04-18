@@ -8,10 +8,9 @@
     body {
       background-color: rgb(61, 107, 156);
       color: white;
-      font-family: Calibri, sans-serif;
+      font-family: 'Carlito', sans-serif;
       margin: 0;
     }
-
     .hero {
       height: 100vh;
       display: flex;
@@ -75,24 +74,28 @@
 
   <script>
     let lastScrollY = window.scrollY;
-    const products = document.querySelectorAll('.product');
+const products = document.querySelectorAll('.product');
 
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollingUp = currentScrollY < lastScrollY;
-      
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  const scrollingUp = currentScrollY < lastScrollY;
 
-      if (scrollingUp) {
-        products.forEach(product => {
-          const rect = product.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100 && !product.classList.contains('show')) {
-            product.classList.add('show');
-          }
-        });
+  // Exit early if no real movement
+  if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+  if (scrollingUp) {
+    products.forEach(product => {
+      if (!product.classList.contains('show')) {
+        const rect = product.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          product.classList.add('show');
+        }
       }
-
-      lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
     });
+  }
+
+  lastScrollY = currentScrollY;
+});
   </script>
   <div class="arrow">&#8595;</div>
 </body>

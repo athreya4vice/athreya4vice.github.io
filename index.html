@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>athreya4vice</title>
+  <style>
+    body {
+      background-color: rgb(62, 62, 215);
+      color: white;
+      font-family: Calibri, sans-serif;
+      margin: 0;
+    }
+    .product-grid{
+          display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 per line */
+  gap: 40px;
+  padding: 40px;
+  justify-items: center;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .header {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+    }
+
+    .product {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-out;
+      margin: 100px auto;
+      width: 65%;
+      max-width: 450px;
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .product.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="header"><b>athreya 4 vice.</b></div>
+  </div>
+  <div class = "product-grid">
+  <div><img class = "product" src = "images/Untitled design.png"></div>
+  <div><img class = "product" src="images/WhatsApp Image 2025-04-18 at 13.02.21.jpeg"></div>
+  <div<img class = "product" src="images/WhatsApp Image 2025-04-18 at 13.10.06.jpeg"></div> 
+  <div><img class = "product" src="images/WhatsApp Image 2025-04-18 at 16.52.36.jpeg"></div>
+  <div><img class = "product" src="images/WhatsApp Image 2025-04-18 at 16.55.02.jpeg"></div>
+  </div>
+
+
+
+  <script>
+    let lastScrollY = window.scrollY;
+    const products = document.querySelectorAll('.product');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+      
+
+      if (scrollingUp) {
+        products.forEach(product => {
+          const rect = product.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100 && !product.classList.contains('show')) {
+            product.classList.add('show');
+          }
+        });
+      }
+
+      lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+    });
+  </script>
+</body>
+</html>
